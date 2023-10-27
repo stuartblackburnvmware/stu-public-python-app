@@ -9,7 +9,7 @@ metadata:
 spec:
   source:
     git:
-      url: https://github.com/stuartblackburnvmware/stu-app2.git
+      url: https://github.com/stuartblackburnvmware/stu-public-python-app.git
       ref:
         branch: main
   build:
