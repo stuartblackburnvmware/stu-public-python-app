@@ -1,0 +1,23 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: stu-public-python-app
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/has-tests: "true"
+    app.kubernetes.io/part-of: stu-public-python-app
+spec:
+  source:
+    git:
+      url: https://github.com/stuartblackburnvmware/stu-app2.git
+      ref:
+        branch: main
+  build:
+    env:
+      - name: BP_FUNCTION
+        value: func.main
+  params:
+  - name: testing_pipeline_matching_labels
+    value:
+      apps.tanzu.vmware.com/pipeline: test
+      apps.tanzu.vmware.com/language: python
