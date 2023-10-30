@@ -9,7 +9,7 @@ class TestFunc(unittest.TestCase):
         with app.test_client() as client:
             response = client.get('/')
             data = response.data.decode('utf-8')
-            expected_output = "This is the greatest PUBLIC Python app ever written. Trust me."
+            expected_output = "This is the greatest PUBLIC python app ever written. Trust me."
             self.assertEqual(data, expected_output)
 
 if __name__ == '__main__':
