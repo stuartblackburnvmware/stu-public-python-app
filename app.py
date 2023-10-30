@@ -5,7 +5,7 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def main():
     return "This is the greatest PUBLIC Python app ever written. Trust me."
 
 @app.route('/api/items', methods=['GET'])
