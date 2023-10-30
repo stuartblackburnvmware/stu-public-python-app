@@ -1,7 +1,7 @@
 # test_func.py
 
 import unittest
-from app import app  # Import the Flask app
+from func import app  # Import the Flask app
 
 class TestFunc(unittest.TestCase):
     def test_main_returns_expected_output(self):
