@@ -6,15 +6,13 @@ app = Flask(__name__)
 def main():
     return "This is the greatest PUBLIC Python app ever written. Trust me."
 
-@app.route('/api/items', methods=['GET'])
-def get_items():
-    items = ["item1", "item2", "item3"]
-    return jsonify(items)
+@app.route('/api2')
+def url2():
+    return "This is the 2nd api endpoint"
 
-@app.route('/api/items/<int:item_id>', methods=['GET'])
-def get_item(item_id):
-    item = f"item{item_id}"
-    return jsonify(item)
+@app.route('/api3')
+def url3():
+    return "This is the 3rd api endpoint"
 
 if __name__ == '__main__':
     app.run(debug=True)
