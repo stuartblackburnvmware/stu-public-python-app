@@ -20,6 +20,4 @@ def get_item(item_id):
     # Implement logic to retrieve and return details of the specified item
     return f"Details of item {item_id}"
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
+# Do not include the app.run() statement here
