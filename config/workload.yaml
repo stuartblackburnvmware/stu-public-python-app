@@ -21,3 +21,11 @@ spec:
     value:
       apps.tanzu.vmware.com/pipeline: test
       apps.tanzu.vmware.com/language: python
+  - name: api_descriptor
+    value:
+      type: openapi
+      location:
+        path: "/"
+      system: made-up-system
+      owner: fake-owner
+      description: "A test api that may or may not exist"
