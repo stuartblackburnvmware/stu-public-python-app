@@ -30,8 +30,8 @@ spec:
       owner: fake-owner
       description: "A test api that may or may not exist"
   serviceClaims:
-  - name: db3
+  - name: db
     ref:
       apiVersion: services.apps.tanzu.vmware.com/v1alpha1
       kind: ClassClaim
-      name: postgres-claim-1
+      name: postgres-claim-2
