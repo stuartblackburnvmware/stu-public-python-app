@@ -30,7 +30,7 @@ spec:
       owner: fake-owner
       description: "A test api that may or may not exist"
   serviceClaims:
-  - name: db
+  - name: db3
     ref:
       apiVersion: services.apps.tanzu.vmware.com/v1alpha1
       kind: ClassClaim
