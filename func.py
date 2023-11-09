@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+# func.py
+from flask import Flask, request, render_template
 import psycopg2
 
 app = Flask(__name__)
@@ -39,26 +40,20 @@ def create_table():
     conn.close()
 
 @app.route('/')
-def index():
+def main():
     create_table()
-    return render_template('index.html')
+    
+    if request.method == 'POST':
+        value = request.form['value']
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-@app.route('/save', methods=['POST'])
-def save_value():
-    value = request.form['value']
-    conn = get_db_connection()
-    cursor = conn.cursor()
+        # Insert the value into the database
+        cursor.execute("INSERT INTO values (value) VALUES (%s);", (value,))
 
-    # Insert the value into the database
-    cursor.execute("INSERT INTO values (value) VALUES (%s);", (value,))
+        conn.commit()
+        conn.close()
 
-    conn.commit()
-    conn.close()
-
-    return render_template('index.html', saved=True)
-
-@app.route('/display')
-def display_values():
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -69,10 +64,6 @@ def display_values():
     conn.close()
 
     return render_template('index.html', values=values)
-
-def main(req):
-    # Placeholder for your main function logic
-    return "This is the greatest PUBLIC python app ever written. Trust me."
 
 if __name__ == '__main__':
     app.run(debug=True)
