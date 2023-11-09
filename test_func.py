@@ -5,7 +5,7 @@ class TestFunc(unittest.TestCase):
     def test_main_returns_expected_output(self):
         # Test the main function
         result = main(None)  # You can pass None for the 'req' argument
-        expected_output = "This is the greatest PUBLIC python app ever written. Trust me."
+        expected_output = "This is the greatest PUBLIC2 python app ever written. Trust me."
         self.assertEqual(result, expected_output)
 
 if __name__ == '__main__':
