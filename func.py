@@ -1,5 +1,5 @@
 # func.py
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import psycopg2
 
 app = Flask(__name__)
@@ -39,22 +39,26 @@ def create_table():
     conn.commit()
     conn.close()
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
+def save_value():
+    create_table()
+    
+    value = request.form['value']
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Insert the value into the database
+    cursor.execute("INSERT INTO t1 (value) VALUES (%s);", (value,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('main'))
+
+@app.route('/')
 def main():
     create_table()
-
-    if request.method == 'POST':
-        value = request.form['value']
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        # Insert the value into the database
-        cursor.execute("INSERT INTO t1 (value) VALUES (%s);", (value,))
-
-        conn.commit()
-        conn.close()
-
-    display_values = 'display_values' in request.form
+    
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -64,7 +68,7 @@ def main():
 
     conn.close()
 
-    return render_template('index.html', values=values, display_values=display_values)
+    return render_template('index.html', values=values)
 
 if __name__ == '__main__':
     app.run(debug=True)
