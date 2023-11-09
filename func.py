@@ -41,7 +41,7 @@ def create_table():
 @app.route('/')
 def index():
     create_table()
-    return render_template('index.html')
+    return render_template('index.html', display_button_clicked=False)
 
 @app.route('/save', methods=['POST'])
 def save_value():
@@ -55,7 +55,7 @@ def save_value():
     conn.commit()
     conn.close()
 
-    return render_template('index.html', saved=True)
+    return render_template('index.html', saved=True, display_button_clicked=False)
 
 @app.route('/display', methods=['GET'])
 def display_values():
@@ -68,7 +68,7 @@ def display_values():
 
     conn.close()
 
-    return render_template('index.html', values=values)
+    return render_template('index.html', values=values, display_button_clicked=True)
 
 def main(req):
     return app(req)
