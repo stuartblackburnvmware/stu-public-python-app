@@ -64,6 +64,9 @@ def get_values():
 @app.route('/', methods=['GET', 'POST'])
 def main():
     create_table()
+
+    display_clicked = request.args.get('display_clicked', False)
+    delete_clicked = request.args.get('delete_clicked', False)
     
     if request.method == 'POST':
         value = request.form['value']
@@ -76,17 +79,16 @@ def main():
         conn.commit()
         conn.close()
 
-    if request.method == 'GET':
-        if 'display' in request.args:
-            # If the 'Display Values' button is clicked, retrieve and display values
-            values = get_values()
-            return render_template('index.html', values=values)
+    if display_clicked:
+        # If the 'Display Values' button is clicked, retrieve and display values
+        values = get_values()
+        return render_template('index.html', values=values, display_clicked=True)
 
-        elif 'delete' in request.args:
-            # If the 'Delete All Records' button is clicked, delete all records
-            delete_all_records()
+    elif delete_clicked:
+        # If the 'Delete All Records' button is clicked, delete all records
+        delete_all_records()
 
-    return render_template('index.html', values=None)
+    return render_template('index.html', values=None, display_clicked=False)
 
 if __name__ == '__main__':
     app.run(debug=True)

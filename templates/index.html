@@ -20,10 +20,11 @@
 
     <h2>Stored Values:</h2>
     <form action="/" method="get">
+        <input type="hidden" name="display_clicked" value="true">
         <button type="submit">Display Values</button>
     </form>
 
-    {% if values %}
+    {% if values and display_clicked %}
         <ul>
             {% for value in values %}
                 <li>{{ value[1] }}</li>
@@ -33,9 +34,9 @@
 
     <hr>
 
-    <!-- Add a button to delete all records -->
     <form action="/" method="get">
-        <button type="submit" name="delete">Delete All Records</button>
+        <input type="hidden" name="delete_clicked" value="true">
+        <button type="submit">Delete All Records</button>
     </form>
 </body>
 </html>
