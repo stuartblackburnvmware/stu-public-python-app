@@ -20,7 +20,6 @@
 
     <h2>Stored Values:</h2>
     <form action="/" method="get">
-        <input type="hidden" name="display_values" value="true">
         <button type="submit">Display Values</button>
     </form>
 
@@ -31,5 +30,12 @@
             {% endfor %}
         </ul>
     {% endif %}
+
+    <hr>
+
+    <!-- Add a button to delete all records -->
+    <form action="/" method="get">
+        <button type="submit" name="delete">Delete All Records</button>
+    </form>
 </body>
 </html>
