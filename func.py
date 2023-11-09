@@ -1,4 +1,5 @@
-# func.py
+import os
+import json
 from flask import Flask, request, render_template
 import psycopg2
 
@@ -39,16 +40,7 @@ def create_table():
     conn.commit()
     conn.close()
 
-@app.route('/')
-def index():
-    create_table()
-    print("Current directory:", os.getcwd())  # Add this line for debugging
-    print("Template folder:", app.template_folder)  # Add this line for debugging
-    return render_template('index.html')
-
-@app.route('/save', methods=['POST'])
-def save_value():
-    value = request.form['value']
+def save_value(value):
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -58,9 +50,6 @@ def save_value():
     conn.commit()
     conn.close()
 
-    return render_template('index.html', saved=True)
-
-@app.route('/display')
 def display_values():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -71,11 +60,18 @@ def display_values():
 
     conn.close()
 
-    return render_template('index.html', values=values)
+    return values
 
 def main(req):
-    # Placeholder for your main function logic
-    return "This is the greatest PUBLIC python app ever written. Trust me."
+    create_table()
+
+    if req.method == 'POST':
+        value = req.form.get('value')
+        save_value(value)
+        return f"Value '{value}' saved successfully!"
+    else:
+        values = display_values()
+        return json.dumps(values)
 
 if __name__ == '__main__':
     app.run(debug=True)
