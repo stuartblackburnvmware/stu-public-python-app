@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import psycopg2
 
 app = Flask(__name__)
@@ -66,13 +66,15 @@ def display_values():
 def main(req):
     create_table()
 
-    if req.method == 'POST':
+    if req.path == '/save' and req.method == 'POST':
         value = req.form.get('value')
         save_value(value)
         return render_template('index.html', saved=True)
-    else:
+    elif req.path == '/display' and req.method == 'GET':
         values = display_values()
         return render_template('index.html', values=values)
+    else:
+        return "This is the greatest PUBLIC python app ever written. Trust me."
 
 if __name__ == '__main__':
     app.run(debug=True)
