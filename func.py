@@ -1,3 +1,4 @@
+# func.py
 from flask import Flask, request, render_template
 import psycopg2
 
@@ -69,6 +70,10 @@ def display_values():
     conn.close()
 
     return render_template('index.html', values=values)
+
+def main(req):
+    # Placeholder for your main function logic
+    return "This is the greatest PUBLIC python app ever written. Trust me."
 
 if __name__ == '__main__':
     app.run(debug=True)
