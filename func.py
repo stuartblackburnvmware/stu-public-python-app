@@ -69,10 +69,10 @@ def main(req):
     if req.method == 'POST':
         value = req.form.get('value')
         save_value(value)
-        return f"Value '{value}' saved successfully!"
+        return render_template('index.html', saved=True)
     else:
         values = display_values()
-        return json.dumps(values)
+        return render_template('index.html', values=values)
 
 if __name__ == '__main__':
     app.run(debug=True)
