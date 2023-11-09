@@ -64,20 +64,24 @@ def main():
         conn.commit()
         conn.close()
 
+    if request.method == 'GET' and 'display' in request.args:
+        # If the 'Display Values' button is clicked, retrieve and display values
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Retrieve values from the database
+        cursor.execute("SELECT * FROM t1;")
+        values = cursor.fetchall()
+
+        conn.close()
+
+        return render_template('index.html', values=values)
+
     if request.method == 'GET' and 'delete' in request.args:
         # If the 'Delete All Records' button is clicked, delete all records
         delete_all_records()
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    # Retrieve values from the database
-    cursor.execute("SELECT * FROM t1;")
-    values = cursor.fetchall()
-
-    conn.close()
-
-    return render_template('index.html', values=values)
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
