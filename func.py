@@ -39,26 +39,27 @@ def create_table():
     conn.commit()
     conn.close()
 
-@app.route('/', methods=['POST'])
-def save_value():
-    create_table()
-    
-    value = request.form['value']
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    # Insert the value into the database
-    cursor.execute("INSERT INTO t1 (value) VALUES (%s);", (value,))
-
-    conn.commit()
-    conn.close()
-
-    return redirect(url_for('main'))
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
     create_table()
-    
+
+    if request.method == 'POST':
+        value = request.form['value']
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Insert the value into the database
+        cursor.execute("INSERT INTO t1 (value) VALUES (%s);", (value,))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('main'))  # Redirect to the main page after saving
+
+    return render_template('index.html')
+
+@app.route('/display', methods=['GET'])
+def display_values():
     conn = get_db_connection()
     cursor = conn.cursor()
 
