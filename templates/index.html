@@ -23,12 +23,14 @@
         <button type="submit">Display Values</button>
     </form>
 
-    {% if values %}
-        <ul>
-            {% for value in values %}
-                <li>{{ value[1] }}</li>
-            {% endfor %}
-        </ul>
+    {% if display_button_clicked %}
+        {% if values %}
+            <ul>
+                {% for value in values %}
+                    <li>{{ value[1] }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     {% endif %}
 </body>
 </html>
