@@ -34,7 +34,7 @@ def create_table():
     cursor = conn.cursor()
 
     # Create a simple table if it doesn't exist
-    cursor.execute("CREATE TABLE IF NOT EXISTS values (id serial PRIMARY KEY, value varchar);")
+    cursor.execute("CREATE TABLE IF NOT EXISTS t1 (id serial PRIMARY KEY, value varchar);")
 
     conn.commit()
     conn.close()
@@ -49,7 +49,7 @@ def main():
         cursor = conn.cursor()
 
         # Insert the value into the database
-        cursor.execute("INSERT INTO values (value) VALUES (%s);", (value,))
+        cursor.execute("INSERT INTO t1 (value) VALUES (%s);", (value,))
 
         conn.commit()
         conn.close()
@@ -58,7 +58,7 @@ def main():
     cursor = conn.cursor()
 
     # Retrieve values from the database
-    cursor.execute("SELECT * FROM values;")
+    cursor.execute("SELECT * FROM t1;")
     values = cursor.fetchall()
 
     conn.close()
