@@ -42,7 +42,8 @@ def create_table():
 @app.route('/')
 def index():
     create_table()
-    print("Rendering index.html")  # Add this line for debugging
+    print("Current directory:", os.getcwd())  # Add this line for debugging
+    print("Template folder:", app.template_folder)  # Add this line for debugging
     return render_template('index.html')
 
 @app.route('/save', methods=['POST'])
