@@ -42,6 +42,7 @@ def create_table():
 @app.route('/')
 def index():
     create_table()
+    print("Rendering index.html")  # Add this line for debugging
     return render_template('index.html')
 
 @app.route('/save', methods=['POST'])
