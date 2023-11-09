@@ -81,7 +81,7 @@ def main():
         # If the 'Delete All Records' button is clicked, delete all records
         delete_all_records()
 
-    return render_template('index.html')
+    return render_template('index.html', values=None)
 
 if __name__ == '__main__':
     app.run(debug=True)
