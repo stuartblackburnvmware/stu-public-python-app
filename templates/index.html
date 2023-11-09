@@ -19,11 +19,11 @@
     <hr>
 
     <h2>Stored Values:</h2>
-    <form action="/" method="get">
+    <form action="/?display=true" method="get">
         <button type="submit">Display Values</button>
     </form>
 
-    {% if values %}
+    {% if display_values %}
         <ul>
             {% for value in values %}
                 <li>{{ value[1] }}</li>
