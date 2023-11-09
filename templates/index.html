@@ -1,5 +1,3 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +19,8 @@
     <hr>
 
     <h2>Stored Values:</h2>
-    <form action="/display" method="get"> <!-- Update form action to "/display" -->
+    <form action="/" method="get">
+        <input type="hidden" name="display_values" value="true">
         <button type="submit">Display Values</button>
     </form>
 
