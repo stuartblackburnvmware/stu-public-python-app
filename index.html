@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database App</title>
+</head>
+<body>
+    <h1>Database App</h1>
+
+    <form action="/save" method="post">
+        <label for="value">Enter a value:</label>
+        <input type="text" name="value" required>
+        <button type="submit">Save</button>
+    </form>
+
+    {% if saved %}
+        <p>Value saved successfully!</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Stored Values:</h2>
+    <form action="/display" method="get">
+        <button type="submit">Display Values</button>
+    </form>
+
+    {% if values %}
+        <ul>
+            {% for value in values %}
+                <li>{{ value[1] }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
