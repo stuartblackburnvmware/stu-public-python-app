@@ -54,14 +54,18 @@ def main():
         conn.commit()
         conn.close()
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    values = []  # Initialize an empty list for values
+    
+    if request.method == 'GET' and 'display' in request.args:
+        # Fetch values from the database only when 'Display Values' button is clicked
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    # Retrieve values from the database
-    cursor.execute("SELECT * FROM values2;")
-    values = cursor.fetchall()
+        # Retrieve values from the database
+        cursor.execute("SELECT * FROM values;")
+        values = cursor.fetchall()
 
-    conn.close()
+        conn.close()
 
     return render_template('index.html', values=values)
 
