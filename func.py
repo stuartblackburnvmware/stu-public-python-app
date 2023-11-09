@@ -58,7 +58,7 @@ def main():
     cursor = conn.cursor()
 
     # Retrieve values from the database
-    cursor.execute("SELECT * FROM values;")
+    cursor.execute("SELECT * FROM values2;")
     values = cursor.fetchall()
 
     conn.close()
