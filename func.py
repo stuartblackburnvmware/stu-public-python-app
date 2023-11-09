@@ -66,15 +66,15 @@ def display_values():
 def main(req):
     create_table()
 
-    if req.path == '/save' and req.method == 'POST':
+    if req.method == 'POST':
         value = req.form.get('value')
         save_value(value)
         return render_template('index.html', saved=True)
-    elif req.path == '/display' and req.method == 'GET':
+    elif req.method == 'GET':
         values = display_values()
         return render_template('index.html', values=values)
     else:
-        return "This is the greatest PUBLIC python app ever written. Trust me."
+        return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
