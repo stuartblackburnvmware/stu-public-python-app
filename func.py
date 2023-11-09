@@ -1,6 +1,4 @@
-import os
-import json
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, render_template, request
 import psycopg2
 
 app = Flask(__name__)
@@ -31,7 +29,6 @@ def get_db_connection():
     return conn
 
 def create_table():
-    print("Debugging: Inside the create_table function")
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -41,7 +38,14 @@ def create_table():
     conn.commit()
     conn.close()
 
-def save_value(value):
+@app.route('/')
+def index():
+    create_table()
+    return render_template('index.html')
+
+@app.route('/save', methods=['POST'])
+def save_value():
+    value = request.form['value']
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -51,6 +55,9 @@ def save_value(value):
     conn.commit()
     conn.close()
 
+    return render_template('index.html', saved=True)
+
+@app.route('/display')
 def display_values():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -61,20 +68,7 @@ def display_values():
 
     conn.close()
 
-    return values
-
-def main(req):
-    create_table()
-
-    if req.method == 'POST':
-        value = req.form.get('value')
-        save_value(value)
-        return render_template('index.html', saved=True)
-    elif req.method == 'GET':
-        values = display_values()
-        return render_template('index.html', values=values)
-    else:
-        return render_template('index.html')
+    return render_template('index.html', values=values)
 
 if __name__ == '__main__':
     app.run(debug=True)
