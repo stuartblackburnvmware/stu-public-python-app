@@ -56,7 +56,7 @@ def main():
 
     values = []  # Initialize an empty list for values
     
-    if request.method == 'GET' and 'display' in request.args:
+    if 'display' in request.args:
         # Fetch values from the database only when 'Display Values' button is clicked
         conn = get_db_connection()
         cursor = conn.cursor()
