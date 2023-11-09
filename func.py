@@ -57,18 +57,13 @@ def main():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    if 'display' in request.args and request.args['display'] == 'true':
-        # Retrieve values from the database if display=true
-        cursor.execute("SELECT * FROM t1;")
-        values = cursor.fetchall()
-        display_values = True
-    else:
-        values = []
-        display_values = False
+    # Retrieve values from the database
+    cursor.execute("SELECT * FROM t1;")
+    values = cursor.fetchall()
 
     conn.close()
 
-    return render_template('index.html', values=values, display_values=display_values)
+    return render_template('index.html', values=values)
 
 if __name__ == '__main__':
     app.run(debug=True)
