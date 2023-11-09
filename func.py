@@ -39,7 +39,7 @@ def create_table():
     conn.commit()
     conn.close()
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
     create_table()
     
