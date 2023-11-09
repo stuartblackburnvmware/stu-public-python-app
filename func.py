@@ -42,7 +42,7 @@ def create_table():
 @app.route('/', methods=['GET', 'POST'])
 def main():
     create_table()
-    
+
     if request.method == 'POST':
         value = request.form['value']
         conn = get_db_connection()
@@ -54,14 +54,17 @@ def main():
         conn.commit()
         conn.close()
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    values = None
 
-    # Retrieve values from the database
-    cursor.execute("SELECT * FROM t1;")
-    values = cursor.fetchall()
+    if request.method == 'GET' and 'display' in request.args:
+        # Retrieve values from the database when the display button is clicked
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    conn.close()
+        cursor.execute("SELECT * FROM t1;")
+        values = cursor.fetchall()
+
+        conn.close()
 
     return render_template('index.html', values=values)
 
