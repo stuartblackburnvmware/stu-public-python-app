@@ -1,4 +1,3 @@
-# func.py
 from flask import Flask, request, render_template
 import psycopg2
 
@@ -39,33 +38,35 @@ def create_table():
     conn.commit()
     conn.close()
 
-@app.route('/', methods=['GET', 'POST'])
-def main():
+@app.route('/')
+def index():
     create_table()
-    
-    if request.method == 'POST':
-        value = request.form['value']
-        conn = get_db_connection()
-        cursor = conn.cursor()
+    return render_template('index.html')
 
-        # Insert the value into the database
-        cursor.execute("INSERT INTO values (value) VALUES (%s);", (value,))
+@app.route('/save', methods=['POST'])
+def save_value():
+    value = request.form['value']
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-        conn.commit()
-        conn.close()
+    # Insert the value into the database
+    cursor.execute("INSERT INTO values (value) VALUES (%s);", (value,))
 
-    values = []  # Initialize an empty list for values
-    
-    if 'display' in request.args:
-        # Fetch values from the database only when 'Display Values' button is clicked
-        conn = get_db_connection()
-        cursor = conn.cursor()
+    conn.commit()
+    conn.close()
 
-        # Retrieve values from the database
-        cursor.execute("SELECT * FROM values;")
-        values = cursor.fetchall()
+    return render_template('index.html', saved=True)
 
-        conn.close()
+@app.route('/display', methods=['GET'])
+def display_values():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Retrieve values from the database
+    cursor.execute("SELECT * FROM values;")
+    values = cursor.fetchall()
+
+    conn.close()
 
     return render_template('index.html', values=values)
 
