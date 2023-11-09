@@ -49,6 +49,18 @@ def delete_all_records():
     conn.commit()
     conn.close()
 
+def get_values():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Retrieve values from the database
+    cursor.execute("SELECT * FROM t1;")
+    values = cursor.fetchall()
+
+    conn.close()
+
+    return values
+
 @app.route('/', methods=['GET', 'POST'])
 def main():
     create_table()
@@ -64,22 +76,15 @@ def main():
         conn.commit()
         conn.close()
 
-    if request.method == 'GET' and 'display' in request.args:
-        # If the 'Display Values' button is clicked, retrieve and display values
-        conn = get_db_connection()
-        cursor = conn.cursor()
+    if request.method == 'GET':
+        if 'display' in request.args:
+            # If the 'Display Values' button is clicked, retrieve and display values
+            values = get_values()
+            return render_template('index.html', values=values)
 
-        # Retrieve values from the database
-        cursor.execute("SELECT * FROM t1;")
-        values = cursor.fetchall()
-
-        conn.close()
-
-        return render_template('index.html', values=values)
-
-    if request.method == 'GET' and 'delete' in request.args:
-        # If the 'Delete All Records' button is clicked, delete all records
-        delete_all_records()
+        elif 'delete' in request.args:
+            # If the 'Delete All Records' button is clicked, delete all records
+            delete_all_records()
 
     return render_template('index.html', values=None)
 
