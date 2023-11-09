@@ -31,6 +31,7 @@ def get_db_connection():
     return conn
 
 def create_table():
+    print("Debugging: Inside the create_table function")
     conn = get_db_connection()
     cursor = conn.cursor()
 
