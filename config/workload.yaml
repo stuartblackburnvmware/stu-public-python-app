@@ -29,9 +29,3 @@ spec:
       system: made-up-system
       owner: fake-owner
       description: "A test api that may or may not exist"
-  serviceClaims:
-  - name: db
-    ref:
-      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-      kind: ClassClaim
-      name: postgres-claim-1
