@@ -4,16 +4,18 @@ from typing import Any
 def main(req: Any):
     # Configure logging
     logging.basicConfig(level=logging.INFO)
-    
+
     try:
         # Your function implementation goes here
         logging.info("Processing request: %s", req)
-        
+
         # Simulate some processing
         result = "This is the greatest PUBLIC python app ever written. Trust me."
-        
+
         logging.info("Processing complete. Result: %s", result)
-        
+
+        # Explicitly print to console
+        print(result)
         return result
     except Exception as e:
         # Log any exceptions
