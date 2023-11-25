@@ -1,0 +1,62 @@
+Name:             test-pod
+Namespace:        stu-ns
+Priority:         0
+Service Account:  default
+Node:             aks-default-41786231-vmss000000/10.224.0.6
+Start Time:       Thu, 16 Nov 2023 14:51:28 -0500
+Labels:           <none>
+Annotations:      <none>
+Status:           Succeeded
+IP:               10.244.1.215
+IPs:
+  IP:  10.244.1.215
+Containers:
+  workload:
+    Container ID:   containerd://48386e4e13602a6c4007c55b2ea68a10e5e7fe77dc7420ae79f4b4ef3ee9139c
+    Image:          stutapregistry.azurecr.io/appimages/stu-public-python-app-stu-ns@sha256:163d0bb6e8d08aa09ac61a59c51d99dfb9ac4c1abede8246c4aea5843d18a7f4
+    Image ID:       stutapregistry.azurecr.io/appimages/stu-public-python-app-stu-ns@sha256:163d0bb6e8d08aa09ac61a59c51d99dfb9ac4c1abede8246c4aea5843d18a7f4
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Thu, 16 Nov 2023 14:51:29 -0500
+      Finished:     Thu, 16 Nov 2023 14:51:29 -0500
+    Ready:          False
+    Restart Count:  0
+    Environment:
+      PORT:             8080
+      K_REVISION:       stu-public-python-app-00004
+      K_CONFIGURATION:  stu-public-python-app
+      K_SERVICE:        stu-public-python-app
+    Mounts:
+      /var/log/app from log-volume (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-f4fsn (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  log-volume:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  kube-api-access-f4fsn:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason   Age   From     Message
+  ----    ------   ----  ----     -------
+  Normal  Pulled   55s   kubelet  Container image "stutapregistry.azurecr.io/appimages/stu-public-python-app-stu-ns@sha256:163d0bb6e8d08aa09ac61a59c51d99dfb9ac4c1abede8246c4aea5843d18a7f4" already present on machine
+  Normal  Created  55s   kubelet  Created container workload
+  Normal  Started  55s   kubelet  Started container workload

@@ -13,9 +13,9 @@ spec:
       ref:
         branch: main
   build:
-    env:
-      - name: BP_FUNCTION
-        value: func.main
+#    env:
+#      - name: BP_FUNCTION
+#        value: func.main
   params:
   - name: annotations
     value:
