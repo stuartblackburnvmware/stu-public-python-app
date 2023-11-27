@@ -1,5 +1,5 @@
 import unittest
-from your_flask_app import app  # Import the Flask app
+from server import app  # Import the Flask app
 
 class TestFunc(unittest.TestCase):
     def setUp(self):
