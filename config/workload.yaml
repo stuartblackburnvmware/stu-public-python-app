@@ -17,6 +17,11 @@ spec:
       - name: BP_CPYTHON_VERSION
         value: "3.6.7"
   params:
+  - name: ports
+    value:
+    - port: 80
+      containerPort: 8000 # gunicorn default port
+      name: http
   - name: annotations
     value:
       autoscaling.knative.dev/minScale: "1"
