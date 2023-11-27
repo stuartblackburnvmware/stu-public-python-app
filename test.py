@@ -1,5 +1,5 @@
 import unittest
-from func import main  # Import the main function to test
+from server import main  # Import the main function to test
 
 class TestFunc(unittest.TestCase):
     def test_main_returns_expected_output(self):
