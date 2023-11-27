@@ -1,12 +1,18 @@
 import unittest
-from server import main  # Import the main function to test
+from your_flask_app import app  # Import the Flask app
 
 class TestFunc(unittest.TestCase):
+    def setUp(self):
+        # Create a test client
+        self.app = app.test_client()
+
     def test_main_returns_expected_output(self):
-        # Test the main function
-        result = main(None)  # You can pass None for the 'req' argument
-        expected_output = "This is the greatest PRIVATE python app ever written. Trust me."
-        self.assertEqual(result, expected_output)
+        # Make a request to the '/' endpoint
+        response = self.app.get('/')
+
+        # Check if the response contains the expected string
+        expected_output = "This is the greatest PUBLIC python app ever written. Trust me."
+        self.assertIn(expected_output, response.get_data(as_text=True))
 
 if __name__ == '__main__':
     unittest.main()
