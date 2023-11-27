@@ -13,9 +13,9 @@ spec:
       ref:
         branch: main
   build:
-    env:
-      - name: BP_CPYTHON_VERSION
-        value: "3.6.7"
+#    env:
+#      - name: BP_CPYTHON_VERSION
+#        value: "3.6.7"
   params:
   - name: ports
     value:
