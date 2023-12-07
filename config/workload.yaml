@@ -29,6 +29,12 @@ spec:
     value:
       apps.tanzu.vmware.com/pipeline: test
       apps.tanzu.vmware.com/language: python
+  serviceClaims:
+    - name: my-workload
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ClassClaim
+        name: my-workload
 #  - name: api_descriptor
 #    value:
 #      type: openapi
