@@ -29,12 +29,6 @@ spec:
     value:
       apps.tanzu.vmware.com/pipeline: test
       apps.tanzu.vmware.com/language: python
-  serviceClaims:
-    - name: unsafe-login-class-claim
-      ref:
-        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-        kind: ClassClaim
-        name: unsafe-login-class-claim
 #  - name: api_descriptor
 #    value:
 #      type: openapi
