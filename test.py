@@ -11,7 +11,7 @@ class TestFunc(unittest.TestCase):
         response = self.app.get('/')
 
         # Check if the response contains the expected string
-        expected_output = "This is the greatest PUBLIC python app ever written. Don't trust me."
+        expected_output = "This is the greatest PUBLIC python app ever written. Trust me."
         self.assertIn(expected_output, response.get_data(as_text=True))
 
 if __name__ == '__main__':
