@@ -16,7 +16,7 @@ spec:
   build:
     env:
       - name: BP_CPYTHON_VERSION
-        value: "3.11.6"
+        value: "3.12.4"
   params:
   - name: ports
     value:
